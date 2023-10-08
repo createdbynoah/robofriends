@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
-import Card from './components/Card';
+import CardList from './components/CardList';
 
 const App = () => {
   return (
-    <div className="App">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+    <div className="container">
+      <h1 className="f-headline lh-solid">RoboFriends</h1>
+      <CardList />
     </div>
   );
 };
