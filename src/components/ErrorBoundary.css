@@ -1,0 +1,12 @@
+.error-message {
+  color: #330867;
+  font-size: 3.5rem;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 600px) {
+  .error-message {
+    font-size: 2.5rem;
+  }
+}
