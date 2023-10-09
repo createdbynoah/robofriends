@@ -1,4 +1,16 @@
-.container {
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&display=swap');
+
+body {
+  background-image: linear-gradient(to bottom, #2abbbb 0%, #330867 100%);
+}
+
+h1 {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 600;
+  color: #330867;
+}
+
+main {
   display: flex;
   padding: 20px;
   justify-content: center;
