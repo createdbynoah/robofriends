@@ -1,50 +1,46 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import CardList from './components/CardList';
 import SearchInput from './components/SearchInput';
 import ScrollContent from './components/ScrollContent';
 import ErrorBoundary from './components/ErrorBoundary';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      robots: [],
-      searchField: '',
-    };
-  }
-  componentDidMount() {
+const App = () => {
+  // useEffect with empty array as second argument is equivalent to componentDidMount
+  // array arguments signal when useEffect should run based on changes to those values
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((res) => res.json())
       .then((users) => {
-        this.setState({ robots: users });
+        setRobots(users);
       });
-  }
+  }, []);
 
-  onSearchChange = (e) => {
-    this.setState({ searchField: e.target.value });
+  const [robots, setRobots] = useState([]);
+  const [searchField, setSearchField] = useState('');
+
+  const onSearchChange = (e) => {
+    setSearchField(e.target.value);
   };
-  render() {
-    const { robots, searchField } = this.state;
-    const filteredRobots = robots.filter((robot) => {
-      return robot.name.toLowerCase().includes(searchField.toLowerCase());
-    });
-    return (
-      <div className="tc" id="App">
-        <header className="nav-bg">
-          <h1 className="title">RoboFriends</h1>
-          <SearchInput searchChange={this.onSearchChange} />
-        </header>
-        <main>
-          <ScrollContent>
-            <ErrorBoundary>
-              <CardList robots={filteredRobots} />
-            </ErrorBoundary>
-          </ScrollContent>
-        </main>
-      </div>
-    );
-  }
-}
+
+  const filteredRobots = robots.filter((robot) => {
+    return robot.name.toLowerCase().includes(searchField.toLowerCase());
+  });
+  return (
+    <div className="tc" id="App">
+      <header className="nav-bg">
+        <h1 className="title">RoboFriends</h1>
+        <SearchInput searchChange={onSearchChange} />
+      </header>
+      <main>
+        <ScrollContent>
+          <ErrorBoundary>
+            <CardList robots={filteredRobots} />
+          </ErrorBoundary>
+        </ScrollContent>
+      </main>
+    </div>
+  );
+};
 
 export default App;
